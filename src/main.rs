@@ -5,6 +5,7 @@ use signal_hook::{consts::SIGINT, consts::SIGUSR1, consts::SIGUSR2, iterator::Si
 use std::env;
 use std::fs;
 use std::io;
+use std::io::Read;
 use std::os::unix::process::CommandExt;
 use std::process::{Command, Stdio};
 use std::sync::mpsc;
@@ -92,7 +93,11 @@ fn main() {
     let args = Args::parse();
     let input_data = match args.input_file {
         Some(f) => fs::read_to_string(f).expect("could not read the input file"),
-        None => io::read_to_string(io::stdin()).unwrap(),
+        None => {
+            let mut buffer = String::new();
+            io::stdin().read_to_string(&mut buffer).unwrap();
+            buffer
+        }
     };
     nthreads = args.threads;
 
