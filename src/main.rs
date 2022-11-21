@@ -113,10 +113,11 @@ fn main() {
     if !args.show_output_instead_of_status {
         bar.set_style(
             ProgressStyle::with_template(
-                "[{elapsed_precise} {eta_precise}] {wide_bar:0.red/blue} {pos:>7}/{len:7}",
+                "[{elapsed_precise} {eta_precise}] {wide_bar:0.red/blue}  {msg} {pos:>7}/{len:7}",
             )
             .unwrap(),
         );
+        bar.set_message(format!("{nthreads} Threads"));
         bar.inc(0);
     }
     let q = Arc::new(Mutex::new(q));
@@ -153,9 +154,11 @@ fn main() {
                 if too_many_threads > 0 {
                     too_many_threads -= 1;
                     nthreads -= 1;
+                    bar.set_message(format!("{nthreads} Threads"));
                 } else {
                     if r == ThreadResponse::PleaseCreateNewThread {
                         nthreads += 1;
+                        bar.set_message(format!("{nthreads} Threads"));
                     }
                     children.push(create_thread(&tx, &q, args.show_output_instead_of_status));
                 }
