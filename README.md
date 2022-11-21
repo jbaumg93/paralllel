@@ -2,7 +2,7 @@
 
 A: _Have you ever tried [GNU parallel](https://www.gnu.org/software/parallel/)? Did it work for you?_  
 B: _Ehm, yes._  
-A: _That's great, how many hours did you spent? Can you add more threads during runtime? Did it show you how long it takes to finish?_  
+A: _That's great, how many hours did you spend? Can you add more threads during runtime? Did it show you how long it takes to finish?_  
 B: _... You are weird._  
 
 _Paralllel_ is a minimalistic and easy to use parallel job executor. It supports adding more threads and reducing threads during runtime. It even calculates an ETA. It's written in [Rust](https://www.rust-lang.org) (_Yey!_) and not in [Perl](https://www.youtube.com/watch?v=noQcWra6sbU) (_Buhh!_)!
